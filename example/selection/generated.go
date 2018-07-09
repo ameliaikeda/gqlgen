@@ -8,6 +8,7 @@ import (
 	fmt "fmt"
 	strconv "strconv"
 
+	models "github.com/vektah/gqlgen/example/selection/model"
 	graphql "github.com/vektah/gqlgen/graphql"
 	introspection "github.com/vektah/gqlgen/neelance/introspection"
 	query "github.com/vektah/gqlgen/neelance/query"
@@ -25,21 +26,21 @@ func NewExecutableSchema(resolvers ResolverRoot) graphql.ExecutableSchema {
 }
 
 type Resolvers interface {
-	Query_events(ctx context.Context) ([]Event, error)
+	Query_events(ctx context.Context) ([]models.Event, error)
 }
 
 type ResolverRoot interface {
 	Query() QueryResolver
 }
 type QueryResolver interface {
-	Events(ctx context.Context) ([]Event, error)
+	Events(ctx context.Context) ([]models.Event, error)
 }
 
 type shortMapper struct {
 	r ResolverRoot
 }
 
-func (s shortMapper) Query_events(ctx context.Context) ([]Event, error) {
+func (s shortMapper) Query_events(ctx context.Context) ([]models.Event, error) {
 	return s.r.Query().Events(ctx)
 }
 
@@ -84,7 +85,7 @@ type executionContext struct {
 var likeImplementors = []string{"Like", "Event"}
 
 // nolint: gocyclo, errcheck, gas, goconst
-func (ec *executionContext) _Like(ctx context.Context, sel []query.Selection, obj *Like) graphql.Marshaler {
+func (ec *executionContext) _Like(ctx context.Context, sel []query.Selection, obj *models.Like) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.Doc, sel, likeImplementors, ec.Variables)
 
 	out := graphql.NewOrderedMap(len(fields))
@@ -110,7 +111,7 @@ func (ec *executionContext) _Like(ctx context.Context, sel []query.Selection, ob
 	return out
 }
 
-func (ec *executionContext) _Like_reaction(ctx context.Context, field graphql.CollectedField, obj *Like) graphql.Marshaler {
+func (ec *executionContext) _Like_reaction(ctx context.Context, field graphql.CollectedField, obj *models.Like) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Like"
 	rctx.Args = nil
@@ -121,7 +122,7 @@ func (ec *executionContext) _Like_reaction(ctx context.Context, field graphql.Co
 	return graphql.MarshalString(res)
 }
 
-func (ec *executionContext) _Like_sent(ctx context.Context, field graphql.CollectedField, obj *Like) graphql.Marshaler {
+func (ec *executionContext) _Like_sent(ctx context.Context, field graphql.CollectedField, obj *models.Like) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Like"
 	rctx.Args = nil
@@ -132,7 +133,7 @@ func (ec *executionContext) _Like_sent(ctx context.Context, field graphql.Collec
 	return graphql.MarshalTime(res)
 }
 
-func (ec *executionContext) _Like_selection(ctx context.Context, field graphql.CollectedField, obj *Like) graphql.Marshaler {
+func (ec *executionContext) _Like_selection(ctx context.Context, field graphql.CollectedField, obj *models.Like) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Like"
 	rctx.Args = nil
@@ -152,7 +153,7 @@ func (ec *executionContext) _Like_selection(ctx context.Context, field graphql.C
 	return arr1
 }
 
-func (ec *executionContext) _Like_collected(ctx context.Context, field graphql.CollectedField, obj *Like) graphql.Marshaler {
+func (ec *executionContext) _Like_collected(ctx context.Context, field graphql.CollectedField, obj *models.Like) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Like"
 	rctx.Args = nil
@@ -175,7 +176,7 @@ func (ec *executionContext) _Like_collected(ctx context.Context, field graphql.C
 var postImplementors = []string{"Post", "Event"}
 
 // nolint: gocyclo, errcheck, gas, goconst
-func (ec *executionContext) _Post(ctx context.Context, sel []query.Selection, obj *Post) graphql.Marshaler {
+func (ec *executionContext) _Post(ctx context.Context, sel []query.Selection, obj *models.Post) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.Doc, sel, postImplementors, ec.Variables)
 
 	out := graphql.NewOrderedMap(len(fields))
@@ -201,7 +202,7 @@ func (ec *executionContext) _Post(ctx context.Context, sel []query.Selection, ob
 	return out
 }
 
-func (ec *executionContext) _Post_message(ctx context.Context, field graphql.CollectedField, obj *Post) graphql.Marshaler {
+func (ec *executionContext) _Post_message(ctx context.Context, field graphql.CollectedField, obj *models.Post) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Post"
 	rctx.Args = nil
@@ -212,7 +213,7 @@ func (ec *executionContext) _Post_message(ctx context.Context, field graphql.Col
 	return graphql.MarshalString(res)
 }
 
-func (ec *executionContext) _Post_sent(ctx context.Context, field graphql.CollectedField, obj *Post) graphql.Marshaler {
+func (ec *executionContext) _Post_sent(ctx context.Context, field graphql.CollectedField, obj *models.Post) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Post"
 	rctx.Args = nil
@@ -223,7 +224,7 @@ func (ec *executionContext) _Post_sent(ctx context.Context, field graphql.Collec
 	return graphql.MarshalTime(res)
 }
 
-func (ec *executionContext) _Post_selection(ctx context.Context, field graphql.CollectedField, obj *Post) graphql.Marshaler {
+func (ec *executionContext) _Post_selection(ctx context.Context, field graphql.CollectedField, obj *models.Post) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Post"
 	rctx.Args = nil
@@ -243,7 +244,7 @@ func (ec *executionContext) _Post_selection(ctx context.Context, field graphql.C
 	return arr1
 }
 
-func (ec *executionContext) _Post_collected(ctx context.Context, field graphql.CollectedField, obj *Post) graphql.Marshaler {
+func (ec *executionContext) _Post_collected(ctx context.Context, field graphql.CollectedField, obj *models.Post) graphql.Marshaler {
 	rctx := graphql.GetResolverContext(ctx)
 	rctx.Object = "Post"
 	rctx.Args = nil
@@ -319,7 +320,7 @@ func (ec *executionContext) _Query_events(ctx context.Context, field graphql.Col
 		if resTmp == nil {
 			return graphql.Null
 		}
-		res := resTmp.([]Event)
+		res := resTmp.([]models.Event)
 		arr1 := graphql.Array{}
 		for idx1 := range res {
 			arr1 = append(arr1, func() graphql.Marshaler {
@@ -1098,17 +1099,17 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 	return ec.___Type(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Event(ctx context.Context, sel []query.Selection, obj *Event) graphql.Marshaler {
+func (ec *executionContext) _Event(ctx context.Context, sel []query.Selection, obj *models.Event) graphql.Marshaler {
 	switch obj := (*obj).(type) {
 	case nil:
 		return graphql.Null
-	case Post:
+	case models.Post:
 		return ec._Post(ctx, sel, &obj)
-	case *Post:
+	case *models.Post:
 		return ec._Post(ctx, sel, obj)
-	case Like:
+	case models.Like:
 		return ec._Like(ctx, sel, &obj)
-	case *Like:
+	case *models.Like:
 		return ec._Like(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))

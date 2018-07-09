@@ -7,13 +7,14 @@ import (
 	"fmt"
 	"time"
 
+	models "github.com/vektah/gqlgen/example/selection/model"
 	"github.com/vektah/gqlgen/graphql"
 	query "github.com/vektah/gqlgen/neelance/query"
 )
 
 type SelectionResolver struct{}
 
-func (r *SelectionResolver) Query_events(ctx context.Context) ([]Event, error) {
+func (r *SelectionResolver) Query_events(ctx context.Context) ([]models.Event, error) {
 	var sels []string
 
 	reqCtx := graphql.GetRequestContext(ctx)
@@ -30,17 +31,17 @@ func (r *SelectionResolver) Query_events(ctx context.Context) ([]Event, error) {
 		}
 	}
 
-	var events []Event
+	var events []models.Event
 	for i := 0; i < 10; i++ {
 		if i%2 == 0 {
-			events = append(events, &Like{
+			events = append(events, &models.Like{
 				Selection: sels,
 				Collected: formatCollected(graphql.CollectFieldsCtx(ctx, []string{"Like"})),
 				Reaction:  ":=)",
 				Sent:      time.Now(),
 			})
 		} else {
-			events = append(events, &Post{
+			events = append(events, &models.Post{
 				Selection: sels,
 				Collected: formatCollected(graphql.CollectFieldsCtx(ctx, []string{"Post"})),
 				Message:   "Hey",
